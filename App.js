@@ -5,6 +5,9 @@ import { View, Text, Image, TextInput, FlatList, StyleSheet, Modal, TouchableOpa
 import { LinearGradient } from 'expo-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Linking } from 'react-native';
+import { WhatsAppButton } from 'react-whatsapp-button';
+
 
 const Stack = createStackNavigator();
 
@@ -33,6 +36,14 @@ const HomeScreen = ({ navigation }) => {
   const filteredProducts = products.filter(product =>
     product.name.toLowerCase().includes(searchText.toLowerCase())
   );
+
+  const handleWhatsAppPress = () => {
+    const phoneNumber = '551140028922';
+    const message = 'Olá! Preciso de ajuda';
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    
+    Linking.openURL(url).catch(err => console.error('Erro ao abrir o WhatsApp', err));
+  };
 
   const handleProductPress = (product) => {
     setSelectedProduct(product);
@@ -116,6 +127,10 @@ const handleDecreaseQuantity = () => {
         )}
         contentContainerStyle={styles.productList}
       />
+      <TouchableOpacity style={styles.whatsappButton} onPress={handleWhatsAppPress}>
+        <Text style={styles.whatsappButtonText}>📞 WhatsApp</Text>
+      </TouchableOpacity>
+      
 
       <Modal
         transparent={true}
@@ -242,6 +257,7 @@ const response = await fetch('http://54.232.122.77:3000/receber-dados', {
         renderItem={renderCartItem}
         contentContainerStyle={styles.cartList}
       />
+
       <View style={styles.totalContainer}>
         <Text style={styles.totalText}>Total: R$ {totalPrice.toFixed(2)}</Text>
       </View>
@@ -255,9 +271,8 @@ const response = await fetch('http://54.232.122.77:3000/receber-dados', {
   );
 };
 
-
-
 const App = () => {
+
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -556,6 +571,20 @@ removeButtonText: {
   fontWeight: 'bold',
   fontSize: 16,
 },
+whatsappButton: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    backgroundColor: '#25D366',
+    padding: 10,
+    borderRadius: 100,
+    elevation: 5,
+  },
+  whatsappButtonText: {
+    color: '#fff',
+    fontSize: 18,
+  },
+
 
 });
 
