@@ -4,9 +4,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FAF3E0',
-    padding: 10,
   },
-
+  inferiorcontainer: {
+    padding: 10,
+    flex: 1,
+  },
+  gradient: {
+    flex: 1,
+    padding: 0,
+  },
+  footerLista: {
+    height: 100,
+    backgroundColor: 'transparent',
+  },
   logoContainer: {
     alignItems: 'center',
     marginBottom: 20,
@@ -64,8 +74,8 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   productImage: {
-    width: 100,
-    height: 100,
+    width: 150,
+    height: 150,
     borderRadius: 10,
     marginBottom: 10,
     resizeMode: 'cover',
@@ -157,26 +167,27 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',
-    width: 200,
+    width: 250,
     padding: 15,
     borderRadius: 10,
-    marginBottom: 10,
     height: 250,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 2,
+    marginTop: 12,
   },
 
   cartItemImage: {
-    width: 130,
-    height: 130,
+    width: 150,
+    height: 150,
     borderRadius: 10,
     marginRight: 10,
     resizeMode: 'cover',
     borderColor: '#8B4513',
     borderWidth: 2,
+    marginBottom: 5,
   },
 
   cartItemName: {
@@ -186,6 +197,7 @@ const styles = StyleSheet.create({
     color: '#6A260A',
   },
   cartItemQuantity: {
+    marginBottom: 5,
     fontSize: 16,
     color: '#DF8B05',
   },
@@ -199,7 +211,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 15,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -269,7 +281,6 @@ const styles = StyleSheet.create({
   containerDados: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#f5f5f5',
   },
   inputDados: {
     height: 50,

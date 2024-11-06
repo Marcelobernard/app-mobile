@@ -411,7 +411,6 @@ const MeusDadosScreen = ({ navigation }) => {
       await AsyncStorage.setItem('userData', JSON.stringify(userData));
       Alert.alert('Sucesso', 'Dados salvos com sucesso!');
       const todosDados = `Sr(a) ${nome} ${sobrenome}, no CEP ${cep} da rua ${rua}, ${bairro}, casa/apt ${numero}. Celular: ${celular}`;
-      // Limpa os campos de entrada
       setNome('');
       setSobrenome('');
       setCep('');
@@ -438,6 +437,7 @@ const MeusDadosScreen = ({ navigation }) => {
   };
 
   return (
+    <LinearGradient colors={['#FAF3E0', '#FAF3FF']} style={styles.gradient}>
     <View style={styles.containerDados}>
       <Text style={styles.cartItemName}>Registre-se aqui:</Text>
       {renderSavedInfo(nome)}
@@ -510,6 +510,7 @@ const MeusDadosScreen = ({ navigation }) => {
         <Text style={styles.buttonTextDados}>Salvar</Text>
       </TouchableOpacity>
     </View>
+    </LinearGradient>
   );
 };
 
@@ -622,7 +623,7 @@ const App = () => {
                 onPress={() => {
                   route.params.setCart([]);
                   navigation.goBack();
-                  alert('Carrinho excluído!');
+                  Alert.alert('Limpo','Carrinho excluído!');
                 }}
                 style={{
                   marginRight: 15,
