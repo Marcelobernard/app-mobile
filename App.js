@@ -2,6 +2,7 @@ import React, { useEffect, useState, Component } from 'react';
 import base64 from 'react-native-base64';
 import styles from './styles';
 import { NavigationContainer } from '@react-navigation/native';
+import { Video } from 'expo-av';
 import { createStackNavigator } from '@react-navigation/stack';
 import {
   View,
@@ -31,87 +32,75 @@ const HomeScreen = ({ navigation }) => {
   const products = [
     {
       id: '1',
-      name: 'ChocoBoom',
-      price: 'R$ 22,00',
-      image:
-        'https://static.itdg.com.br/images/360-240/9e621f4e0b36756979fda3f87f8279a5/340593-original.jpg',
+      name: 'Avelã',
+      price: 'R$ 5,00',
+      image: require('./assets/produto1.jpg'),
     },
     {
       id: '2',
-      name: 'Nuttella',
-      price: 'R$ 25,00',
-      image:
-        'https://static.itdg.com.br/images/640-400/bb23c39289f794ecfc512b6f6d74192f/72812-original.jpg',
+      name: 'Nutella',
+      price: 'R$ 6,00',
+      image: require('./assets/produto2.jpg'),
     },
     {
       id: '3',
-      name: 'Blackout',
-      price: 'R$ 18,00',
-      image:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRAO8YURNFvhnWWniEODINeUDOEyA0rT1HIg&s',
+      name: 'Bolinho',
+      price: 'R$ 3,00',
+      image: require('./assets/produto3.jpg'),
     },
     {
       id: '4',
-      name: 'MarshMelt',
-      price: 'R$ 21,00',
-      image:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCtyoz24HNgCeSq34iYz3Pj_6M1bXSP0zYS1kb9G_cYVx4nVeuU1B9YYEqPkriRCBuDbE&usqp=CAU',
+      name: 'Básico',
+      price: 'R$ 4,00',
+      image: require('./assets/produto4.jpg'),
     },
     {
       id: '5',
-      name: 'CaramelNut',
-      price: 'R$ 24,00',
-      image:
-        'https://img.freepik.com/fotos-premium/brownies-de-caramelo-escuro-cozido-fresco-com-cobertura-de-castanha-de-caju-na-cremalheira-em-close-up-vista-delicioso-sabor-amargo-doce-em-borracha-e-fudgy-brownie-e-um-tipo-de-bolo-de-chocolate-conceito-de-padaria-caseira_54413-407.jpg?w=996',
+      name: 'Vulcão',
+      price: 'R$ 8,00',
+      image: require('./assets/produto5.jpg'),
     },
     {
       id: '6',
-      name: 'ChocoBerry',
-      price: 'R$ 26,00',
-      image:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-BV9o6ZLWlIaPOOFydzfUsZFmU-v9Xddl4_JCWvTzzz_ySu40Hnlsjy1WwpbcpezdbwE&usqp=CAU',
+      name: 'Aveia',
+      price: 'R$ 7,00',
+      image: require('./assets/produto6.jpg'),
     },
     {
       id: '7',
-      name: 'Double Trouble',
-      price: 'R$ 20,00',
-      image:
-        'https://i.pinimg.com/564x/12/83/70/128370273e3919a095bb2ee40fde5a51.jpg',
+      name: 'Gourmet',
+      price: 'R$ 12,00',
+      image: require('./assets/produto7.jpg'),
     },
     {
       id: '8',
-      name: 'Ice & Fudge',
-      price: 'R$ 28,00',
-      image:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Chocolate_brownie_with_a_scoop_of_icecream_from_Gowlett%2C_Peckham%2C_London.jpg/1280px-Chocolate_brownie_with_a_scoop_of_icecream_from_Gowlett%2C_Peckham%2C_London.jpg',
+      name: 'Kids',
+      price: 'R$ 5,00',
+      image: require('./assets/produto8.jpg'),
     },
     {
       id: '9',
-      name: 'Supreme',
-      price: 'R$ 22,00',
-      image:
-        'https://www.receitadevovo.com.br/_next/image?url=https%3A%2F%2Fd2qcpt1idvpipw.cloudfront.net%2Frecipes%2F2020%2F10%2Fbolo-de-brownie_15032019144941.jpg&w=3840&q=75',
+      name: 'Ferrero Rocher',
+      price: 'R$ 18,00',
+      image: require('./assets/produto9.jpg'),
     },
     {
       id: '10',
-      name: 'ChocoCrispy',
-      price: 'R$ 19,00',
-      image:
-        'https://d1ih8jugeo2m5m.cloudfront.net/2022/05/como-fazer-brownie-para-vender-1200x685.jpg',
+      name: 'Whey Protein',
+      price: 'R$ 12,00',
+      image: require('./assets/produto10.jpg'),
     },
     {
       id: '11',
-      name: 'Creamy Dream',
-      price: 'R$ 23,00',
-      image:
-        'https://s2-receitas.glbimg.com/AgFzqWGWdxXiZLwlesn9f9r5CNs=/0x0:500x375/1000x0/smart/filters:strip_icc()/s.glbimg.com/po/rc/media/2013/10/14/22_35_48_754_20130718_174918.jpg',
+      name: 'Torta',
+      price: 'R$ 80,00',
+      image: require('./assets/produto11.jpg'),
     },
     {
       id: '12',
-      name: 'Nutty ChocoBlast',
-      price: 'R$ 27,00',
-      image:
-        'https://receitaspratossaborosos.com.br/wp-content/uploads/2023/11/77f274af-d9b3-41f1-8e7a-648745b-930x620.webp',
+      name: 'Bandeja padrão',
+      price: 'R$ 120,00',
+      image: require('./assets/produto12.jpg'),
     },
   ];
 
@@ -184,99 +173,111 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.logoContainer}></View>
-      <View style={styles.bannerContainer}>
-        <Image
-          source={{ uri: 'https://i.imgur.com/Midi9wM.jpg' }}
-          style={styles.bannerImage}
-        />
-      </View>
-      <View style={styles.header}>
-        <TextInput
-          style={styles.searchBar}
-          placeholder="Pesquisar..."
-          value={searchText}
-          onChangeText={setSearchText}
-        />
-        <TouchableOpacity
-          style={styles.cartIcon}
-          onPress={() => navigation.navigate('Carrinho', { cart, setCart })}>
-          <Icon name="shopping-cart" size={30} color="#fff" />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.cartIcon}
-          onPress={() => navigation.navigate('Meus Dados')}>
-          <Icon name="person" size={30} color="#fff" />
-        </TouchableOpacity>
-      </View>
-
-      <FlatList
-        data={filteredProducts}
-        keyExtractor={(item) => item.id}
-        numColumns={2}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => handleProductPress(item)}
-            style={styles.productCard}>
-            <Image source={{ uri: item.image }} style={styles.productImage} />
-            <Text style={styles.productName}>{item.name}</Text>
-            <Text style={styles.productPrice}>{item.price}</Text>
-          </TouchableOpacity>
-        )}
-        contentContainerStyle={styles.productList}
-      />
-      <TouchableOpacity
-        style={styles.whatsappButton}
-        onPress={handleWhatsAppPress}>
-        <Text style={styles.whatsappButtonText}>📞 WhatsApp</Text>
-      </TouchableOpacity>
-
-      <Modal
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}>
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            {selectedProduct && (
-              <>
-                {}
-                <Text style={styles.modalTitle}>{selectedProduct.name}</Text>
-                {}
-                <TextInput
-                  style={styles.quantityInput}
-                  value={quantity}
-                  keyboardType="numeric"
-                  onChangeText={setQuantity}
-                />
-                <View style={styles.buttonContainer}>
-                  <TouchableOpacity
-                    onPress={handleDecreaseQuantity}
-                    style={styles.modalButton}>
-                    <Text style={styles.modalButtonText}>-</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={handleIncreaseQuantity}
-                    style={styles.modalButton}>
-                    <Text style={styles.modalButtonText}>+</Text>
-                  </TouchableOpacity>
-                </View>
-                <TouchableOpacity
-                  onPress={handleAddToCart}
-                  style={styles.addButton}>
-                  <Text style={styles.addButtonText}>
-                    Adicionar ao Carrinho
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => setModalVisible(false)}
-                  style={styles.closeButton}>
-                  <Text style={styles.closeButtonText}>Fechar</Text>
-                </TouchableOpacity>
-              </>
-            )}
+      <LinearGradient colors={['#FAF3E0', '#643C22']} style={styles.gradient}>
+        <View style={styles.inferiorcontainer}>
+          <View style={styles.logoContainer}></View>
+          <View style={styles.bannerContainer}>
+            <Video
+              source={require('./assets/banner.mp4')}
+              style={styles.bannerImage}
+              resizeMode="cover"
+              shouldPlay
+              isLooping
+            />
           </View>
+          <View style={styles.header}>
+            <TextInput
+              style={styles.searchBar}
+              placeholder="Pesquisar..."
+              value={searchText}
+              onChangeText={setSearchText}
+            />
+            <TouchableOpacity
+              style={styles.cartIcon}
+              onPress={() =>
+                navigation.navigate('Carrinho', { cart, setCart })
+              }>
+              <Icon name="shopping-cart" size={30} color="#fff" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.cartIcon}
+              onPress={() => navigation.navigate('Meus Dados')}>
+              <Icon name="person" size={30} color="#fff" />
+            </TouchableOpacity>
+          </View>
+          <FlatList
+            data={filteredProducts}
+            keyExtractor={(item) => item.id}
+            numColumns={2}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                onPress={() => handleProductPress(item)}
+                style={styles.productCard}>
+                <Image source={item.image} style={styles.productImage} />
+                <Text style={styles.productName}>{item.name}</Text>
+                <Text style={styles.productPrice}>{item.price}</Text>
+              </TouchableOpacity>
+            )}
+            contentContainerStyle={styles.productList}
+            ListFooterComponent={<View style={styles.footerLista} />}
+          />
+
+          <TouchableOpacity
+            style={styles.whatsappButton}
+            onPress={handleWhatsAppPress}>
+            <Text style={styles.whatsappButtonText}>📞 WhatsApp</Text>
+          </TouchableOpacity>
+
+          <Modal
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => setModalVisible(false)}>
+            <View style={styles.modalContainer}>
+              <View style={styles.modalContent}>
+                {selectedProduct && (
+                  <>
+                    {}
+                    <Text style={styles.modalTitle}>
+                      {selectedProduct.name}
+                    </Text>
+                    {}
+                    <TextInput
+                      style={styles.quantityInput}
+                      value={quantity}
+                      keyboardType="numeric"
+                      onChangeText={setQuantity}
+                    />
+                    <View style={styles.buttonContainer}>
+                      <TouchableOpacity
+                        onPress={handleDecreaseQuantity}
+                        style={styles.modalButton}>
+                        <Text style={styles.modalButtonText}>-</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={handleIncreaseQuantity}
+                        style={styles.modalButton}>
+                        <Text style={styles.modalButtonText}>+</Text>
+                      </TouchableOpacity>
+                    </View>
+                    <TouchableOpacity
+                      onPress={handleAddToCart}
+                      style={styles.addButton}>
+                      <Text style={styles.addButtonText}>
+                        Adicionar ao Carrinho
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => setModalVisible(false)}
+                      style={styles.closeButton}>
+                      <Text style={styles.closeButtonText}>Fechar</Text>
+                    </TouchableOpacity>
+                  </>
+                )}
+              </View>
+            </View>
+          </Modal>
         </View>
-      </Modal>
+      </LinearGradient>
     </View>
   );
 };
@@ -563,7 +564,7 @@ const CartScreen = ({ route, navigation }) => {
           <Text style={styles.removeButtonText}>X</Text>
         </TouchableOpacity>
         <Text style={styles.cartItemName}>{item.name}</Text>
-        <Image source={{ uri: item.image }} style={styles.cartItemImage} />
+        <Image source={item.image} style={styles.cartItemImage} />
         <Text style={styles.cartItemQuantity}>Quantidade: {item.quantity}</Text>
         <Text style={styles.cartItemPrice}>
           Preço total: R$ {item.totalPrice.toFixed(2)}
